@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar'; // Adjust the path based on your structure
+import Transactions from './components/Transactions'; // Adjust the path
+import Categories from './components/Categories'; // Adjust the path
 import './App.css';
-import Transactions from './pages/Transactions.jsx';
-import Categories from './components/Categories.jsx'; // Adjust the path if necessary
 
-
-function App() {
+const App = () => {
   return (
-    <div className="app-container">
-      <header>
-        <h1 className="app-title">Finance Tracker</h1>
-      </header>
-      <main>
-        <Transactions />  {/* ✅ Now renders the correct TransactionCard version */}
-        <Categories />    {/* Categories list */}
-
-      </main>
-    </div>
+    <Router>
+      <div className="app-container">
+        <Navbar />
+        <div className="main-content">
+          <Routes>
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/categories" element={<Categories />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
