@@ -1,128 +1,177 @@
-.transactions-container {
-  background: transparent; /* Changed from #f5f7fa */
-  color: #333;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 1000px;
-  margin: 0 auto;
+.transactions-page {
+  padding: 1px;
+  background: #1E2525; /* Ensure the page background matches the main-content */
+  color: #FFFFFF;
+  
 }
 
-.transactions-container h2 {
+.transactions-page h2 {
   font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  color: #FFFFFF; /* White text */
+  background: linear-gradient(90deg, #4a90e2, #357abd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .transaction-form-section {
   margin-bottom: 20px;
+  background: #2A3232; /* Slightly lighter background for the container */
+  padding: 15px;
+  border-radius: 1px;
+  border : 1px solid #444;
+  overflow: hidden; /* Subtle border to separate from main content */
 }
 
 .transaction-form-section h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #555;
-}
-
-.error-message {
-  background: #ffe6e6;
-  color: #d32f2f;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.success-message {
-  background: #e6ffe6;
-  color: #2e7d32;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  text-align: center;
+  color: #D3D3D3; /* Light gray for secondary text */
 }
 
 .transaction-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  border-radius: 1px;
+  border : 1px solid #444;
 }
 
 .transaction-form input,
 .transaction-form select {
+  flex: 1;
+  min-width: 150px;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #444; /* Subtle border for inputs */
   border-radius: 4px;
-  background: #fff;
-  color: #333;
+  background: #3A4242; /* Darker input background */
+  color: #FFFFFF; /* White text */
   font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .transaction-form input:focus,
 .transaction-form select:focus {
   outline: none;
   border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
 }
 
 .transaction-form button {
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  background: #0b114e;
-  color: white;
+  background: #4a90e2; /* Blue button to match the theme */
+  color: #FFFFFF;
   cursor: pointer;
   font-size: 1rem;
+  border-radius: 1px;
+  border : 1px solid #444;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
 .transaction-form button:hover {
-  background: #08134d;
+  background: #357abd;
+  transform: translateY(-2px);
+}
+
+.transaction-form button:active {
+  transform: translateY(0);
 }
 
 .filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  background: #2A3232; /* Container for filters */
+  padding: 15px;
+  border-radius: 1px;
+  border : 1px solid #444;
 }
 
 .filters select,
 .filters input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: #fff;
-  color: #333;
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 1px;
+  background: #3A4242;
+  color: #FFFFFF;
   font-size: 1rem;
-}
-
-.filters input::placeholder {
-  color: #999;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .filters select:focus,
 .filters input:focus {
   outline: none;
   border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
 }
 
-.filters .export-button {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
+.filters button {
+  padding: 8px 16px;
+  border-radius: 1px;
+  border : 1px solid #444;
   background: #4a90e2;
-  color: white;
+  color: #FFFFFF;
   cursor: pointer;
   font-size: 1rem;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
-.filters .export-button:hover {
+.filters button:hover {
   background: #357abd;
+  transform: translateY(-2px);
+}
+
+.filters button:active {
+  transform: translateY(0);
 }
 
 .transactions-list {
+  background: #2A3232; /* Container for the transaction list */
+  padding: 15px;
   display: flex;
+  border-radius: 1px;
+  border : 1px solid #444;
   flex-direction: column;
   gap: 10px;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #3A4242;
+  border-radius: 1px;
+  border : 1px solid #444;
+}
+
+.bulk-actions button {
+  padding: 8px 16px;
+  background: #e74c3c; /* Red for delete */
+  color: #FFFFFF;
+  border-radius: 1px;
+  border : 1px solid #444;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.bulk-actions button:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.bulk-actions button:hover:not(:disabled) {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+.bulk-actions button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .no-transactions {
@@ -131,71 +180,164 @@
   font-size: 1.1rem;
 }
 
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #D3D3D3;
+}
+
 .transaction-item {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 50px 2fr 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 1px;
+  border : 1px solid #444;
+  background: #3A4242; /* Slightly darker background for each item */
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.transaction-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .transaction-item span {
-  font-size: 1rem;
-  color: #333;
+  font-size: 1.1rem;
+  color: #FFFFFF;
 }
 
 .transaction-actions {
   display: flex;
   gap: 10px;
-  justify-content: flex-end;
 }
 
 .transaction-actions button {
   padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
+  border-radius: 1px;
+  border : 1px solid #444;
   cursor: pointer;
   font-size: 0.9rem;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
 .transaction-actions button:first-child {
-  background: #4385d1;
-  color: #333;
+  background: #4a90e2; /* Blue for Edit */
+  color: #FFFFFF;
 }
 
 .transaction-actions button:first-child:hover {
-  background: #6c31da;
+  background: #357abd;
+  transform: translateY(-2px);
+}
+
+.transaction-actions button:first-child:active {
+  transform: translateY(0);
 }
 
 .transaction-actions button:last-child {
-  background: #e74c3c;
-  color: white;
+  background: #e74c3c; /* Red for Delete */
+  color: #FFFFFF;
 }
 
 .transaction-actions button:last-child:hover {
   background: #c0392b;
+  transform: translateY(-2px);
+}
+
+.transaction-actions button:last-child:active {
+  transform: translateY(0);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  background: #2A3232; /* Container for pagination */
+  padding: 10px;
+  border-radius: 1px;
+  border : 1px solid #444;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border-radius: 1px;
+  border : 1px solid #444;
+  background: #4a90e2;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.pagination button:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #357abd;
+  transform: translateY(-2px);
+}
+
+.pagination button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.pagination span {
+  font-size: 1rem;
+  color: #D3D3D3;
 }
 
 @media (max-width: 600px) {
-  .transactions-container {
+  .transactions-page {
     padding: 15px;
-    margin: 10px;
   }
 
-  .transaction-form,
+  .transaction-form {
+    flex-direction: column;
+  }
+
+  .transaction-form button {
+    width: 100%;
+  }
+
   .filters {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .filters button {
+    width: 100%;
   }
 
   .transaction-item {
-    grid-template-columns: 1fr;
-    gap: 5px;
-    text-align: center;
+    grid-template-columns: 50px 1fr;
+    gap: 10px;
+  }
+
+  .transaction-item span {
+    grid-column: 2;
   }
 
   .transaction-actions {
-    justify-content: center;
+    grid-column: 2;
+    justify-content: flex-end;
   }
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  background: #2A3232;
+  border-radius: 8px;
+}
+
+.transaction-form button:disabled {
+  background: #357abd;
+  cursor: not-allowed;
+  opacity: 0.7;
 }

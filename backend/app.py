@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from database import db  
 from routes.transactions import transactions_bp
 from routes.categories import categories_bp
+from routes.budgets import budgets_bp 
 
 app = Flask(__name__)
 
@@ -21,6 +22,7 @@ migrate = Migrate(app, db)
 
 app.register_blueprint(transactions_bp)
 app.register_blueprint(categories_bp)
+app.register_blueprint(budgets_bp)  
 
 @app.route('/')
 def home():
