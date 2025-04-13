@@ -1,65 +1,158 @@
 from flask import Blueprint, request, jsonify
-from backend.models import db, Transaction  # Instead of: from ..models import db, Transaction
+from models import db, Transaction, Category,Budget
+from datetime import datetime
 
 transactions_bp = Blueprint('transactions', __name__)
 
 @transactions_bp.route('/api/transactions', methods=['GET'])
 def get_transactions():
-    transactions = Transaction.query.all()
-    return jsonify([
-        {
-            'id': t.id,
-            'title': t.title,
-            'amount': t.amount,
-            'type': t.type,
-            'date': t.date,
-            'category_id': t.category_id,
-            'category': t.category.name if t.category else None
-        }
-        for t in transactions
-    ])
+    try:
+        month = request.args.get('month')
+        year = request.args.get('year')
+        category_id = request.args.get('category_id')
+        type = request.args.get('type')
+        search = request.args.get('search')
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        sort_field = request.args.get('sort_field', 'date')
+        sort_order = request.args.get('sort_order', 'desc')
+
+        query = Transaction.query
+
+        if month and year:
+            query = query.filter(
+                Transaction.date.startswith(f"{year}-{month}")
+            )
+        elif year:
+            query = query.filter(Transaction.date.startswith(year))
+
+        if category_id:
+            query = query.filter_by(category_id=int(category_id))
+
+        if type:
+            query = query.filter_by(type=type)
+
+        if search:
+            query = query.filter(Transaction.title.ilike(f"%{search}%"))
+
+        # Apply sorting
+        if sort_field == 'date':
+            query = query.order_by(Transaction.date.desc() if sort_order == 'desc' else Transaction.date.asc())
+        elif sort_field == 'amount':
+            query = query.order_by(Transaction.amount.desc() if sort_order == 'desc' else Transaction.amount.asc())
+
+        # Pagination
+        total_items = query.count()
+        total_pages = (total_items + per_page - 1) // per_page
+        transactions = query.offset((page - 1) * per_page).limit(per_page).all()
+
+        return jsonify({
+            'transactions': [
+                {
+                    'id': t.id,
+                    'title': t.title,
+                    'amount': t.amount,
+                    'type': t.type,
+                    'date': t.date,
+                    'category_id': t.category_id
+                } for t in transactions
+            ],
+            'total_pages': total_pages,
+            'total_items': total_items
+        })
+    except Exception as e:
+        return jsonify({'message': f'Error fetching transactions: {str(e)}'}), 500
 
 @transactions_bp.route('/api/transactions', methods=['POST'])
-def create_transaction():
-    data = request.get_json()
-    transaction = Transaction(
-        title=data['title'],
-        amount=data['amount'],
-        type=data['type'],
-        date=data['date'],
-        category_id=data.get('category_id')
-    )
-    db.session.add(transaction)
-    db.session.commit()
-    return jsonify({'message': 'Transaction created!'}), 201
+def add_transaction():
+    try:
+        data = request.get_json()
+        new_transaction = Transaction(
+            title=data['title'],
+            amount=data['amount'],
+            type=data['type'],
+            date=data['date'],
+            category_id=data.get('category_id')
+        )
+        db.session.add(new_transaction)
+        db.session.commit()
 
+        # Checks  budget limit if the transaction is an expense
+        budget_exceeded = False
+        budget_message = None
+        if new_transaction.type == 'Expense' and new_transaction.category_id:
+            month = new_transaction.date[:7]  # Extract YYYY-MM from date
+            budget = Budget.query.filter_by(category_id=new_transaction.category_id, month=month).first()
+            if budget:
+                # It Calculates total expenses for this category and month
+                total_expenses = db.session.query(db.func.sum(Transaction.amount)).filter(
+                    Transaction.category_id == new_transaction.category_id,
+                    Transaction.type == 'Expense',
+                    Transaction.date.startswith(month)
+                ).scalar() or 0
+                if total_expenses > budget.amount:
+                    budget_exceeded = True
+                    budget_message = f"Warning: You have exceeded your budget of {budget.amount} for category '{budget.category.name}' this month. Total expenses: {total_expenses}."
+
+        response = {
+            'id': new_transaction.id,
+            'title': new_transaction.title,
+            'amount': new_transaction.amount,
+            'type': new_transaction.type,
+            'date': new_transaction.date,
+            'category_id': new_transaction.category_id,
+            'budget_exceeded': budget_exceeded,
+            'budget_message': budget_message
+        }
+        return jsonify(response), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': f'Error adding transaction: {str(e)}'}), 500
 @transactions_bp.route('/api/transactions/<int:id>', methods=['PUT'])
 def update_transaction(id):
-    transaction = Transaction.query.get_or_404(id)
-    data = request.get_json()
-    transaction.title = data['title']
-    transaction.amount = data['amount']
-    transaction.type = data['type']
-    transaction.date = data['date']
-    transaction.category_id = data.get('category_id')
-
-    db.session.commit()
-
-    return jsonify({
-        'id': transaction.id,
-        'title': transaction.title,
-        'amount': transaction.amount,
-        'type': transaction.type,
-        'date': transaction.date,
-        'category_id': transaction.category_id,
-        'category': transaction.category.name if transaction.category else None,
-        'message': 'Transaction updated!'
-    })
-
+    try:
+        data = request.get_json()
+        transaction = Transaction.query.get_or_404(id)
+        transaction.title = data['title']
+        transaction.amount = data['amount']
+        transaction.type = data['type']
+        transaction.date = data['date']
+        transaction.category_id = data.get('category_id')
+        db.session.commit()
+        return jsonify({
+            'id': transaction.id,
+            'title': transaction.title,
+            'amount': transaction.amount,
+            'type': transaction.type,
+            'date': transaction.date,
+            'category_id': transaction.category_id
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': f'Error updating transaction: {str(e)}'}), 500
 
 @transactions_bp.route('/api/transactions/<int:id>', methods=['DELETE'])
 def delete_transaction(id):
-    transaction = Transaction.query.get_or_404(id)
-    db.session.delete(transaction)
-    db.session.commit()
-    return jsonify({'message': 'Transaction deleted!'})
+    try:
+        transaction = Transaction.query.get_or_404(id)
+        db.session.delete(transaction)
+        db.session.commit()
+        return jsonify({'message': 'Transaction deleted successfully'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': f'Error deleting transaction: {str(e)}'}), 500
+
+@transactions_bp.route('/api/transactions/bulk_delete', methods=['POST'])
+def bulk_delete_transactions():
+    try:
+        data = request.get_json()
+        transaction_ids = data.get('ids', [])
+        if not transaction_ids:
+            return jsonify({'message': 'No transactions selected for deletion'}), 400
+
+        Transaction.query.filter(Transaction.id.in_(transaction_ids)).delete(synchronize_session=False)
+        db.session.commit()
+        return jsonify({'message': 'Selected transactions deleted successfully'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': f'Error deleting transactions: {str(e)}'}), 500

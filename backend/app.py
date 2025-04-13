@@ -3,12 +3,25 @@ from flask_cors import CORS
 from flask_migrate import Migrate  # Import Migrate
 from flask_login import LoginManager, login_user, login_required, current_user # Import LoginManager
 from flask_bcrypt import Bcrypt # Import Flask-Bcrypt
-from backend.models import db, User  # Your db setup
-from backend.routes.transactions import transactions_bp
-from backend.routes.categories import categories_bp
-from backend.routes.auth import auth_bp
+
+from models import db, User  # Your db setup
+from routes.transactions import transactions_bp
+from routes.categories import categories_bp
+from routes.auth import auth_bp
+# from database import db 
+from routes.budgets import budgets_bp 
 
 app = Flask(__name__)
+
+CORS(app, supports_credentials=True, resources={r"/api/*": {
+    "origins": "http://localhost:5173",
+    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "allow_headers": ["Content-Type"]
+}})
+
+# CORS(app, supports_credentials=True, origins="http://localhost:5173")
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finance.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '88YGEVSHYD7WJWJS'
@@ -20,16 +33,14 @@ login_manager = LoginManager(app)  # Initialize LoginManager
 login_manager.login_view = "auth.login"  # Set the login view
 migrate = Migrate(app, db)  # Initialize Migrate instance with app and db
 
-CORS(app, supports_credentials=True, resources={r'/*': {'origins': 'http://localhost:5173'}})  # Enable CORS for all routes
-
-# register blueprints
-app.register_blueprint(auth_bp, url_prefix='/auth')
-app.register_blueprint(transactions_bp, url_prefix='/transactions')
-app.register_blueprint(categories_bp, url_prefix='/categories')
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+app.register_blueprint(auth_bp, url_prefix="/api")
+app.register_blueprint(transactions_bp)
+app.register_blueprint(categories_bp)
+app.register_blueprint(budgets_bp)  
 
 @app.route('/')
 def home():
@@ -44,5 +55,5 @@ def dashboard():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # You can keep this, but Flask-Migrate should handle migrations
-    app.run(debug=True)
+        db.create_all()
+    app.run(debug=True, port=5001)

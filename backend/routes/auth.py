@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from flask_login import login_user, login_required, logout_user
 from flask_bcrypt import Bcrypt
-from backend.models import User, db
+from models import User, db
+from flask import Flask
+from flask_cors import CORS
 
 auth_bp = Blueprint('auth', __name__)
 
