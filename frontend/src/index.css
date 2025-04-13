@@ -1,6 +1,84 @@
-
 body {
   margin: 0;
   background-color: #1e1e2f;
   min-height: 100vh;
+}
+:root {
+  /* Light Theme */
+  --light-bg-primary: #f8f9fa;
+  --light-bg-secondary: #ffffff;
+  --light-text-primary: #212529;
+  --light-text-secondary: #495057;
+  --light-accent: #4a90e2;
+  --light-accent-dark: #357abd;
+  --light-border: #dee2e6;
+  --light-card-bg: #ffffff;
+  --light-input-bg: #f8f9fa;
+  --light-nav-bg: #343a40;
+  --light-nav-text: #f8f9fa;
+  --light-error: #dc3545;
+  --light-error-bg: #ffe6e6;
+  --light-success: #28a745;
+  --light-success-bg: #e6ffe6;
+  --light-warning: #ffc107;
+  --light-disabled: #6c757d;
+
+  /* Dark Theme (based on your current colors) */
+  --dark-bg-primary: #1e1e2f;
+  --dark-bg-secondary: #1E2525;
+  --dark-text-primary: #f8f9fa;
+  --dark-text-secondary: #adb5bd;
+  --dark-accent: #5a9dee;
+  --dark-accent-dark: #357abd;
+  --dark-border: #3e3e5a;
+  --dark-card-bg: #2A3232;
+  --dark-input-bg: #3A4242;
+  --dark-nav-bg: #252538;
+  --dark-nav-text: #e9ecef;
+  --dark-error: #ff6b6b;
+  --dark-error-bg: #330000;
+  --dark-success: #51cf66;
+  --dark-success-bg: #003300;
+  --dark-warning: #f1c40f;
+  --dark-disabled: #495057;
+}
+
+body.light {
+  --bg-primary: var(--light-bg-primary);
+  --bg-secondary: var(--light-bg-secondary);
+  --text-primary: var(--light-text-primary);
+  --text-secondary: var(--light-text-secondary);
+  --accent: var(--light-accent);
+  --accent-dark: var(--light-accent-dark);
+  --border: var(--light-border);
+  --card-bg: var(--light-card-bg);
+  --input-bg: var(--light-input-bg);
+  --nav-bg: var(--light-nav-bg);
+  --nav-text: var(--light-nav-text);
+  --error: var(--light-error);
+  --error-bg: var(--light-error-bg);
+  --success: var(--light-success);
+  --success-bg: var(--light-success-bg);
+  --warning: var(--light-warning);
+  --disabled: var(--light-disabled);
+}
+
+body.dark {
+  --bg-primary: var(--dark-bg-primary);
+  --bg-secondary: var(--dark-bg-secondary);
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --accent: var(--dark-accent);
+  --accent-dark: var(--dark-accent-dark);
+  --border: var(--dark-border);
+  --card-bg: var(--dark-card-bg);
+  --input-bg: var(--dark-input-bg);
+  --nav-bg: var(--dark-nav-bg);
+  --nav-text: var(--dark-nav-text);
+  --error: var(--dark-error);
+  --error-bg: var(--dark-error-bg);
+  --success: var(--dark-success);
+  --success-bg: var(--dark-success-bg);
+  --warning: var(--dark-warning);
+  --disabled: var(--dark-disabled);
 }

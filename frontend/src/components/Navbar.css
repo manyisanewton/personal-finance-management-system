@@ -1,8 +1,8 @@
 .navbar {
   width: 200px;
-  background: #1E2525;
+  background: var(--nav-bg);
   padding: 20px 0;
-  border-right: 1px solid #444;
+  border-right: 1px solid var(--border);
   position: fixed;
   top: 60px;
   left: 0;
@@ -20,7 +20,6 @@
     margin-left: 200px; 
   }
 }
-
 
 @media (max-width: 768px) {
   .navbar {
@@ -53,19 +52,18 @@
   align-items: center;
   gap: 10px;
   padding: 15px 20px;
-  color: #D3D3D3;
+  color: var(--nav-text);
   text-decoration: none;
   font-size: 1.1rem;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .navbar a:hover {
-  background: #3A4242;
-  color: #FFFFFF;
+  background: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .navbar a.active {
-  background: #4a90e2;
-  color: #FFFFFF;
+  background: var(--accent);
+  color: var(--nav-text);
 }
-

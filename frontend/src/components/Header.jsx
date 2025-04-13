@@ -1,14 +1,25 @@
 import React from 'react';
-import { FaBars } from 'react-icons/fa';
+import { FaBars ,FaSun,FaMoon} from 'react-icons/fa';
 import './Header.css';
+import {useTheme} from '../context/ThemeContext';
 
 const Header = ({ routeTitle, isNavOpen, setIsNavOpen }) => {
+    const{theme,toggleTheme}=useTheme();
+
   return (
     <header className="app-header">
       <div className="header-left">
         <h1>Finance Manager</h1>
         <span className="route-title">{routeTitle}</span>
       </div>
+      <div className="header-right">
+        <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      >
+        {theme === 'dark' ? <FaSun /> : <FaMoon />}
+      </button>
       <button
         className="menu-toggle"
         onClick={() => setIsNavOpen(!isNavOpen)}
@@ -16,6 +27,7 @@ const Header = ({ routeTitle, isNavOpen, setIsNavOpen }) => {
       >
         <FaBars />
       </button>
+      </div>
     </header>
   );
 };

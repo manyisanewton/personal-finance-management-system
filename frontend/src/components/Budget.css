@@ -1,37 +1,38 @@
 .budget-page {
     padding: 20px;
-    background: #1E2525;
-    color: #FFFFFF;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
   }
   
   .budget-page h2 {
     font-size: 1.8rem;
     margin-bottom: 20px;
-    color: #FFFFFF;
-    background: linear-gradient(90deg, #4a90e2, #357abd);
+    color: var(--text-primary);
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   
   .budget-form-section {
     margin-bottom: 20px;
-    background: #2A3232;
+    background: var(--card-bg);
     padding: 15px;
-   
-  border-radius: 1px;
-  border : 1px solid #444;
+    border-radius: 10px;
+    border: 1px solid var(--border);
   }
   
   .budget-form-section h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color: #D3D3D3;
+    color: var(--text-secondary);
+   
   }
   
   .budget-form {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+   
   }
   
   .form-group {
@@ -44,17 +45,16 @@
   
   .form-group label {
     font-size: 1rem;
-    color: #D3D3D3;
+    color: var(--text-secondary);
   }
   
   .budget-form input,
   .budget-form select {
     padding: 10px;
-    
-  border-radius: 1px;
-  border : 1px solid #444;
-    background: #3A4242;
-    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text-primary);
     font-size: 1rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
@@ -62,17 +62,16 @@
   .budget-form input:focus,
   .budget-form select:focus {
     outline: none;
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+    border-color: var(--accent);
+    box-shadow: 0 0 5px rgba(var(--accent-rgb), 0.3);
   }
   
   .budget-form button {
     padding: 10px 10px;
-    
-  border-radius: 1px;
-  border : 1px solid #444;
-    background: #1a3452;
-    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--accent-dark);
+    color: var(--nav-text);
     cursor: pointer;
     height: 50px;
     font-size: 1rem;
@@ -80,7 +79,7 @@
   }
   
   .budget-form button:hover {
-    background: #357abd;
+    background: var(--accent);
     transform: translateY(-2px);
   }
   
@@ -90,40 +89,39 @@
   
   .budget-filter {
     margin-bottom: 20px;
-    background: #2A3232;
+    background: var(--card-bg);
     padding: 15px;
     display: flex;
-    border-radius: 1px;
-  border : 1px solid #444;
+    border-radius: 10px;
+    border: 1px solid var(--border);
     align-items: center;
     gap: 10px;
   }
   
   .budget-filter label {
     font-size: 1rem;
-    color: #D3D3D3;
+    color: var(--text-secondary);
   }
   
   .budget-filter input {
     padding: 8px;
-    border-radius: 1px;
-    border : 1px solid #444;
-    background: #3A4242;
-    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text-primary);
     font-size: 1rem;
   }
   
   .budget-filter input:focus {
     outline: none;
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+    border-color: var(--accent);
+    box-shadow: 0 0 5px rgba(var(--accent-rgb), 0.3);
   }
   
   .budget-list {
-    background: #2A3232;
-   
-  border-radius: 1px;
-  border : 1px solid #444;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -131,10 +129,9 @@
   
   .budget-item {
     padding: 10px;
-    background: #3A4242;
-    
-  border-radius: 1px;
-  border : 1px solid #444;
+    background: var(--input-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
   }
   
@@ -146,19 +143,19 @@
   .budget-item h4 {
     font-size: 1.2rem;
     margin-bottom: 5px;
-    color: #FFFFFF;
+    color: var(--text-primary);
   }
   
   .budget-item p {
     font-size: 1rem;
-    color: #D3D3D3;
+    color: var(--text-secondary);
     margin: 5px 0;
   }
   
   .progress-bar {
     width: 100%;
     height: 10px;
-    background: #444;
+    background: var(--border);
     border-radius: 5px;
     overflow: hidden;
     margin: 10px 0;
@@ -166,20 +163,20 @@
   
   .progress-fill {
     height: 100%;
-    background: #4a90e2;
+    background: var(--accent);
     transition: width 0.3s ease;
   }
   
   .progress-fill.warning {
-    background: #f1c40f; 
+    background: var(--warning);
   }
   
   .progress-fill.over-budget {
-    background: #e74c3c; 
+    background: var(--error);
   }
   
   .budget-warning {
-    color: #e74c3c;
+    color: var(--error);
     font-weight: bold;
   }
   
@@ -191,21 +188,20 @@
   
   .budget-actions button {
     padding: 6px 12px;
-
-  border-radius: 1px;
-  border : 1px solid #444;
+    border-radius: 10px;
+    border: 1px solid var(--border);
     cursor: pointer;
     font-size: 0.9rem;
     transition: background 0.3s ease, transform 0.1s ease;
   }
   
   .budget-actions button:first-child {
-    background: #4a90e2;
-    color: #FFFFFF;
+    background: var(--accent);
+    color: var(--nav-text);
   }
   
   .budget-actions button:first-child:hover {
-    background: #357abd;
+    background: var(--accent-dark);
     transform: translateY(-2px);
   }
   
@@ -214,12 +210,12 @@
   }
   
   .budget-actions button:last-child {
-    background: #e74c3c;
-    color: #FFFFFF;
+    background: var(--error);
+    color: var(--nav-text);
   }
   
   .budget-actions button:last-child:hover {
-    background: #c0392b;
+    background: var(--dark-error);
     transform: translateY(-2px);
   }
   
@@ -229,14 +225,14 @@
   
   .no-budgets {
     text-align: center;
-    color: #999;
+    color: var(--text-secondary);
     font-size: 1.1rem;
   }
   
   .loading {
     text-align: center;
     font-size: 1.2rem;
-    color: #D3D3D3;
+    color: var(--text-secondary);
   }
   
   @media (max-width: 600px) {
@@ -255,5 +251,6 @@
     .budget-filter {
       flex-direction: column;
       align-items: flex-start;
+      
     }
   }

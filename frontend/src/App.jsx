@@ -2,6 +2,8 @@ import React, { useState, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
+import { useTheme } from './context/ThemeContext';
+import './index.css';
 
 // Lazy load the route components
 const Transactions = React.lazy(() => import('./components/Transactions'));
@@ -13,6 +15,7 @@ import './App.css';
 const AppLayout = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const location = useLocation();
+  const {theme} = useTheme();//added this line
 
   const getRouteTitle = () => {
     const path = location.pathname;
@@ -24,7 +27,7 @@ const AppLayout = () => {
   };
 
   return (
-    <div className="app">
+    <div className={`app ${theme}`}>
       <Header routeTitle={getRouteTitle()} isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
       <div className="main-content">
         <Navbar isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />

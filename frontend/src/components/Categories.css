@@ -1,12 +1,13 @@
 .categories-page {
   padding: 20px;
+  background: var(--bg-secondary);
 }
 
 .categories-page h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
-  color: #333;
-  background: linear-gradient(90deg, #4a90e2, #357abd);
+  color: var(--text-primary);
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -18,12 +19,12 @@
 .category-form-section h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .error-message {
-  background: #ffe6e6;
-  color: #d32f2f;
+  background: var(--error-bg);
+  color: var(--error);
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 15px;
@@ -31,8 +32,8 @@
 }
 
 .success-message {
-  background: #e6ffe6;
-  color: #2e7d32;
+  background: var(--success-bg);
+  color: var(--success);
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 15px;
@@ -43,38 +44,39 @@
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  border-radius:10px;
 }
 
 .category-form input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: #fff;
-  color: #333;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  color: var(--text-primary);
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .category-form input:focus {
   outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+  border-color: var(--accent);
+  box-shadow: 0 0 5px rgba(var(--accent-rgb), 0.3);
 }
 
 .category-form button {
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  background: #4a90e2;
-  color: white;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--nav-text);
   cursor: pointer;
   font-size: 1rem;
   transition: background 0.3s ease, transform 0.1s ease;
 }
 
 .category-form button:hover {
-  background: #357abd;
+  background: var(--accent-dark);
   transform: translateY(-2px);
 }
 
@@ -86,18 +88,19 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border-radius: 10px;
 }
 
 .no-categories {
   text-align: center;
-  color: #999;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
 .loading {
   text-align: center;
   font-size: 1.2rem;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .category-item {
@@ -105,9 +108,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -124,30 +127,30 @@
 }
 
 .category-icon {
-  color: #4a90e2;
+  color: var(--accent);
   font-size: 1.2rem;
 }
 
 .category-item span {
   font-size: 1.1rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .category-item input {
   flex: 1;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 4px;
-  background: #f0f0f0;
-  color: #333;
+  background: var(--input-bg);
+  color: var(--text-primary);
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .category-item input:focus {
   outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+  border-color: var(--accent);
+  box-shadow: 0 0 5px rgba(var(--accent-rgb), 0.3);
 }
 
 .category-actions {
@@ -158,7 +161,7 @@
 .category-actions button {
   padding: 6px 12px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background 0.3s ease, transform 0.1s ease;
@@ -171,8 +174,8 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
-  color: white;
+  background: var(--text-primary);
+  color: var(--bg-primary);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -188,12 +191,12 @@
 }
 
 .category-actions button:first-child {
-  background: #4a90e2;
-  color: white;
+  background: var(--accent);
+  color: var(--nav-text);
 }
 
 .category-actions button:first-child:hover {
-  background: #357abd;
+  background: var(--accent-dark);
   transform: translateY(-2px);
 }
 
@@ -202,12 +205,12 @@
 }
 
 .category-actions button:last-child {
-  background: #e74c3c;
-  color: white;
+  background: var(--error);
+  color: var(--nav-text);
 }
 
 .category-actions button:last-child:hover {
-  background: #c0392b;
+  background: var(--dark-error);
   transform: translateY(-2px);
 }
 
