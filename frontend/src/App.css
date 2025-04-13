@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  line-height: 1.6;
+   line-height: 1.6;
   padding: 0 40px;
   overflow-x: hidden;
 }
@@ -35,28 +35,16 @@ a {
 
 .transaction-buttons .edit-btn {
   background-color: transparent;
-  color: var(--accent);
-}
-
-.transaction-buttons .edit-btn:hover {
-  color: var(--accent-dark);
 }
 
 .transaction-buttons .delete-btn {
   background-color: transparent;
-  color: var(--error);
 }
-
-.transaction-buttons .delete-btn:hover {
-  color: var(--dark-error);
-}
-
 /* App container */
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px;
-  background-color: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -70,7 +58,6 @@ header {
 .app-title {
   font-size: 3rem;
   font-weight: bold;
-  color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -79,7 +66,6 @@ header {
 .section-title {
   font-size: 2rem;
   font-weight: 500;
-  color: var(--text-primary);
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -98,7 +84,6 @@ header {
 }
 
 .transaction-item {
-  background-color: var(--card-bg);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);

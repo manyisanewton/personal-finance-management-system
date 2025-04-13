@@ -3,6 +3,7 @@ body {
   background-color: #1e1e2f;
   min-height: 100vh;
 }
+
 :root {
   /* Light Theme */
   --light-bg-primary: #f8f9fa;
