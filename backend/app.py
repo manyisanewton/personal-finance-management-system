@@ -1,15 +1,17 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate  # Import Migrate
 from flask_login import LoginManager, login_user, login_required, current_user # Import LoginManager
 from flask_bcrypt import Bcrypt # Import Flask-Bcrypt
 
-from models import db, User  # Your db setup
+from models import db, User, Transaction  # Your db setup
 from routes.transactions import transactions_bp
 from routes.categories import categories_bp
 from routes.auth import auth_bp
+from routes.category_routes import category_summary_bp
 # from database import db 
 from routes.budgets import budgets_bp 
+from sqlalchemy import func
 
 app = Flask(__name__)
 
@@ -38,6 +40,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 app.register_blueprint(auth_bp, url_prefix="/api")
+app.register_blueprint(category_summary_bp)
 app.register_blueprint(transactions_bp)
 app.register_blueprint(categories_bp)
 app.register_blueprint(budgets_bp)  
@@ -51,6 +54,17 @@ def home():
 def dashboard():
     return render_template('dashboard.html', user=current_user)
 
+@app.route('/api/balance_summary', methods=['GET'])
+def get_balance_summary():
+    total_income = db.session.query(func.sum(Transaction.amount)).filter_by(type='Income').scalar() or 0
+    total_expense = db.session.query(func.sum(Transaction.amount)).filter_by(type='Expense').scalar() or 0
+    balance = total_income - total_expense
+
+    return jsonify({
+        "total_income": total_income,
+        "total_expense": total_expense,
+        "balance": balance
+    }), 200
 
 
 if __name__ == '__main__':

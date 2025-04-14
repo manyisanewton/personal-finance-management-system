@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
+# from database import db
+
 db = SQLAlchemy()
 
 class User(db.Model, UserMixin):
@@ -22,7 +24,7 @@ class Transaction(db.Model):
     title = db.Column(db.String(120), nullable=False)
     amount = db.Column(db.Float, nullable=False)
     type = db.Column(db.String(20), nullable=False)
-    date = db.Column(db.String, nullable=False)  # Store as string (YYYY-MM-DD)the year-month-date
+    date = db.Column(db.Date, nullable=False)  # Store as string (YYYY-MM-DD)the year-month-date
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='SET NULL'))
     category = db.relationship("Category", backref="transactions")
 

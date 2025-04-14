@@ -1,0 +1,51 @@
+.monthly-chart-card {
+    background-color: #1D1D29;
+    color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4PX 6px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+
+}
+
+@media (max-width: 768px) {
+    .monthly-chart-card {
+        max-width: 50%;
+    }
+}
+
+.chart-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #FFBC11;
+    text-align: center;
+}
+
+.chart-bars {
+    display: flex;
+    align-items: flex-end;
+    height: 200px;
+    gap: 0.5rem;
+}
+
+.bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30px;
+}
+
+.bar {
+    width: 100%;
+    background-color: #4578F9;
+    border-radius: 0.25rem;
+    transition: height 0.3s ease;
+}
+
+.bar-label {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}

@@ -1,0 +1,35 @@
+.transactions-card {
+    background-color: #1D1D29;
+    padding: 1rem;
+    border-radius: 12px;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 188, 17, 0.2);
+    margin-top: 20px;
+}
+
+.transactions-title {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #ffbc11;
+}
+
+.transactions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.t-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.t.item.expense t.amount {
+    color: #ff3e3e;
+}
+
+.t-item.income .t-amount {
+    color: #43b430;
+}

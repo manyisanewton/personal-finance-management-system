@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models import db, Transaction, Category,Budget
 from datetime import datetime
+from sqlalchemy.orm import joinedload
 
 transactions_bp = Blueprint('transactions', __name__)
 
@@ -156,3 +157,34 @@ def bulk_delete_transactions():
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': f'Error deleting transactions: {str(e)}'}), 500
+
+#  for recent transactions
+@transactions_bp.route('/api/recent_transactions', methods=['GET'])
+def get_recent_transactions():
+    try:
+        transactions = (
+            Transaction.query
+            .options(joinedload(Transaction.category))
+            .order_by(Transaction.date.desc())
+            .limit(5)
+            .all()
+        )
+
+        result = []
+        for t in transactions:
+            try:
+                result.append({                
+                    'id': t.id,
+                    'title': t.title,
+                    'amount': t.amount,
+                    'type': t.type,
+                    'date': t.date.strftime('%Y-%m-%d') if t.date else None,
+                    'category': t.category.name if t.category else "Uncategorized"
+                })
+            except Exception as inner_e:
+                print(f"Error formatting transactio ID {t.id}: {inner_e}")
+                continue        
+
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({'message': f'Error fetching recent transactions: {str(e)}'}), 500
