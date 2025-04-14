@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ensure pyc files dont come again
+*.pyc
+__pycache__/
