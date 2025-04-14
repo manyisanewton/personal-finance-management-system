@@ -1,8 +1,6 @@
-    # 📊 Personal Finance Management System
+# 📊 Personal Finance Management System
 
-A full-stack web application that helps users effectively manage their personal finances. It provides tools for tracking transactions, setting budgets, managing categories, and viewing insights through a dashboard.
-
----
+This is a full-stack web application that helps users effectively manage their personal finances. It provides tools for tracking transactions, setting budgets, managing categories, and viewing insights through a dashboard.
 
 ## 🌐 Features
 
@@ -15,7 +13,6 @@ A full-stack web application that helps users effectively manage their personal 
 - 📦 Lazy-loaded components for faster loading
 - 🎨 Animated UI with Framer Motion
 
----
 
 ## 🧩 Technologies Used
 
@@ -34,7 +31,6 @@ A full-stack web application that helps users effectively manage their personal 
 - **Flask-Bcrypt** for password hashing
 - **SQLite** or other database for storage
 
----
 
 ## 🏁 Getting Started
 
@@ -48,6 +44,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 export FLASK_APP=app.py
 flask run
+```
 
 ## ⚛️ Frontend Setup
 
@@ -56,7 +53,6 @@ cd frontend
 npm install
 npm run dev
 ```
-
 This will start the development server, and you can access the application at `http://localhost:5173` (default Vite port).
 
 ## Project Structure
@@ -82,3 +78,13 @@ personal-finance-management-system/
 - Use tools like **Netlify**, **Vercel**, or **Render** for hosting the frontend and backend.
 - Make sure your **environment variables** (e.g., DB URL, API keys) are securely managed using `.env` files or deployment dashboards.
 - For production, consider setting up proper **CORS** and **CSRF** protection for API security.
+
+## Collaborators
+1. Shakira Syevuo - `shakira.syevuo@student.moringaschool.com`
+2. Newton Manyisa - `newton.manyisa@student.moringaschool.com`
+3. Sandra Misigo - `sandra.misigo@student.moringaschool.com`
+4. Joyce Ngari - `joyce.ngari@student.moringaschool.com`
+5. Patrick Kawuki - `kawuki.patrick@student.moringaschool.com`
+
+## License
+This project is licensed under the MIT License.
