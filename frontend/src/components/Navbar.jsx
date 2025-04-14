@@ -1,26 +1,20 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaChartBar, FaWallet, FaExchangeAlt, FaList } from 'react-icons/fa';
+import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaMoneyBillWave } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import './Navbar.css';
-
 const Navbar = ({ isNavOpen, setIsNavOpen }) => {
   const location = useLocation();
-
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       setIsNavOpen(false);
     }
   };
-
   const navbarVariants = {
     hidden: { x: '-100%' },
     visible: { x: 0 },
   };
-
-  // Only animate on mobile (max-width: 768px)
   const shouldAnimate = window.innerWidth <= 768;
-
   return (
     <motion.nav
       className="navbar"
@@ -32,8 +26,8 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
       <ul>
         <li>
           <Link
-            to="/"
-            className={location.pathname === '/' ? 'active' : ''}
+            to="/dashboard"
+            className={location.pathname === '/dashboard' ? 'active' : ''}
             onClick={handleLinkClick}
           >
             <FaChartBar /> Dashboard
@@ -66,9 +60,17 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
             <FaList /> Categories
           </Link>
         </li>
+        <li>
+          <Link
+            to="/currency-converter"
+            className={location.pathname === '/currency-converter' ? 'active' : ''}
+            onClick={handleLinkClick}
+          >
+            <FaMoneyBillWave /> Currency Converter
+          </Link>
+        </li>
       </ul>
     </motion.nav>
   );
 };
-
 export default Navbar;
