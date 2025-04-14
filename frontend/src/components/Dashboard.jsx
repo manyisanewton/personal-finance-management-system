@@ -5,6 +5,7 @@ import MonthlySpendingChart from './DashboardWidgets/MonthlySpendingChart';
 import CategorySpendingChart from './DashboardWidgets/CategorySpendingChart';
 import RecentTransactionsList from './DashboardWidgets/RecentTransactionsList';
 import IncomeVsExpenseChart from './DashboardWidgets/IncomeVsExpenseChart';
+import SpendingSummary from './DashboardWidgets/SpendingSummary';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -54,6 +55,8 @@ const Dashboard = () => {
       <div className='charts-row'>
         <MonthlySpendingChart transactions={transactions.transactions} />
         <CategorySpendingChart  /> 
+        <SpendingSummary />
+
       </div>
 
       <div className='bottom-widgets'>

@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
-from models import db, Budget, Category
+from models import db, Budget, Category, Transaction
 from datetime import datetime
+from sqlalchemy import extract
 
 budgets_bp = Blueprint('budgets', __name__)
 
@@ -79,3 +80,39 @@ def delete_budget(id):
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': f'Error deleting budget: {str(e)}'}), 500
+    
+# for the spending summary
+@budgets_bp.route('/api/spending_summary', methods=['GET'])
+def get_spending_summary():
+    try:
+        month = request.args.get('month')
+        if not month:
+            month = datetime.now().strftime('%Y-%m')
+
+        year, month_num = map(int, month.split('-'))
+
+        budgets = Budget.query.filter_by(month=month).all()
+        total_budget = sum(b.amount for b in budgets)
+
+        total_spent = 0
+        for budget in budgets:
+            spent = db.session.query(db.func.sum(Transaction.amount)).filter(
+                Transaction.category_id == budget.category_id,
+                Transaction.type == "Expense",
+                extract('year', Transaction.date) == year,
+                extract('month', Transaction.date) == month_num
+            ).scalar() or 0
+            total_spent += spent
+
+        return jsonify({
+            "month": f"{year}={month_num:02}",
+            "total_budget": total_budget,
+            "total_spent": total_spent,
+            "remaining": round(total_budget - total_spent, 2)
+        })
+
+    except Exception as e:
+        return jsonify({'message': f'Error generating spending summary: {str(e)}'}), 500
+
+
+

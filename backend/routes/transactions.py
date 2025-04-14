@@ -67,13 +67,26 @@ def get_transactions():
 @transactions_bp.route('/api/transactions', methods=['POST'])
 def add_transaction():
     try:
+        print("Raw request data:", request.data)
         data = request.get_json()
+        print("Received JSON data:", data)
+        title = data['title']  # Corrected assignment
+        amount = data['amount']  # Corrected assignment
+        type = data['type']    # Corrected assignment
+        date_str = data['date']  # Corrected assignment
+        category_id = data.get('category_id')
+
+        try:
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+        except ValueError:
+            return jsonify({'message': 'Invalid date format. PLease use YYYY-MM-DD'}), 400
+
         new_transaction = Transaction(
-            title=data['title'],
-            amount=data['amount'],
-            type=data['type'],
-            date=data['date'],
-            category_id=data.get('category_id')
+            title=title,
+            amount=amount,
+            type=type,
+            date=date_obj,
+            category_id=category_id
         )
         db.session.add(new_transaction)
         db.session.commit()
@@ -82,7 +95,7 @@ def add_transaction():
         budget_exceeded = False
         budget_message = None
         if new_transaction.type == 'Expense' and new_transaction.category_id:
-            month = new_transaction.date[:7]  # Extract YYYY-MM from date
+            month = new_transaction.date.strftime('%Y-%m')  # Extract YYYY-MM from date
             budget = Budget.query.filter_by(category_id=new_transaction.category_id, month=month).first()
             if budget:
                 # It Calculates total expenses for this category and month
@@ -100,7 +113,7 @@ def add_transaction():
             'title': new_transaction.title,
             'amount': new_transaction.amount,
             'type': new_transaction.type,
-            'date': new_transaction.date,
+            'date': new_transaction.date.strftime('%Y-%m-%d'),
             'category_id': new_transaction.category_id,
             'budget_exceeded': budget_exceeded,
             'budget_message': budget_message
@@ -109,6 +122,8 @@ def add_transaction():
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': f'Error adding transaction: {str(e)}'}), 500
+
+
 @transactions_bp.route('/api/transactions/<int:id>', methods=['PUT'])
 def update_transaction(id):
     try:

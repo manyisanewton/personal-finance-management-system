@@ -1,0 +1,14 @@
+.spending-summary-card {
+    background-color: #1D1D29;
+    padding: 1rem;
+    border-radius: 12px;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 188, 17, 0.2);
+    margin-top: 20px;
+}
+
+.spending-summary-title {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #ffbc11;
+}

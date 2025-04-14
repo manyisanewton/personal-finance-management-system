@@ -185,6 +185,8 @@ const Transactions = () => {
  return;
  }
 
+ console.log('Form date:', form.date);
+
  setFormLoading(true);
  try {
  const method = form.id ? 'PUT' : 'POST';
