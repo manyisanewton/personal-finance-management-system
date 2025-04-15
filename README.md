@@ -56,21 +56,43 @@ npm run dev
 This will start the development server, and you can access the application at `http://localhost:5173` (default Vite port).
 
 ## Project Structure
-personal-finance-management-system/
-├── backend/
+.
+├── backend
 │   ├── app.py
-│   ├── models/
-│   ├── database/
-│   ├── routes/
-│   └── ...
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── App.jsx
-│   │   └── index.css
-│   └── ...
-└── README.md
+│   ├── database.py
+│   ├── __init__.py
+│   ├── instance
+│   ├── migrations
+│   ├── models.py
+│   ├── Pipfile
+│   ├── Pipfile.lock
+│   ├── __pycache__
+│   ├── routes
+│   ├── seed.py
+│   ├── templates
+│   └── venv
+├── frontend
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── node_modules
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── src
+│   └── vite.config.js
+├── LICENSE
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── requirements.txt
+└── venv
+    ├── bin
+    ├── include
+    ├── lib
+    ├── lib64 -> lib
+    └── pyvenv.cfg
 
 ## 🛠️ Deployment Tips
 

@@ -25,6 +25,12 @@ flask-cors = "*"
 flask-migrate = "*"
 flask-login = "*"
 flask-bcrypt = "*"
+requests = "*"
+python-dotenv = "*"
+matplotlib = "*"
+pandas = "*"
+reportlab = "*"
+apscheduler = "*"
 
 [dev-packages]
 

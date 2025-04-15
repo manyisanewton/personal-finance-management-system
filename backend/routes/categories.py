@@ -1,9 +1,6 @@
 from flask import Blueprint, jsonify, request
-# from database import db
-from models import Category, db
-
+from models import db, Category
 categories_bp = Blueprint('categories', __name__)
-
 @categories_bp.route('/api/categories', methods=['GET'])
 def get_categories():
     try:
@@ -11,7 +8,6 @@ def get_categories():
         return jsonify([{'id': c.id, 'name': c.name} for c in categories])
     except Exception as e:
         return jsonify({'message': f'Error fetching categories: {str(e)}'}), 500
-
 @categories_bp.route('/api/categories', methods=['POST'])
 def add_category():
     data = request.get_json()
@@ -30,7 +26,6 @@ def add_category():
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': f'Error adding category: {str(e)}'}), 500
-
 @categories_bp.route('/api/categories/<int:id>', methods=['PUT'])
 def update_category(id):
     category = Category.query.get(id)
@@ -51,7 +46,6 @@ def update_category(id):
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': f'Error updating category: {str(e)}'}), 500
-
 @categories_bp.route('/api/categories/<int:id>', methods=['DELETE'])
 def delete_category(id):
     category = Category.query.get(id)

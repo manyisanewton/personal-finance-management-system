@@ -1,13 +1,11 @@
+
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaSignOutAlt } from 'react-icons/fa';
+import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaSignOutAlt, FaMoneyBillWave } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import './Navbar.css';
-
 const Navbar = ({ isNavOpen, setIsNavOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       setIsNavOpen(false);
@@ -34,15 +32,11 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
       console.error('Error while logging out:', error);
     }
   };
-
   const navbarVariants = {
     hidden: { x: '-100%' },
     visible: { x: 0 },
   };
-
-  // Only animate on mobile (max-width: 768px)
   const shouldAnimate = window.innerWidth <= 768;
-
   return (
     <motion.nav
       className="navbar"
@@ -54,8 +48,8 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
       <ul>
         <li>
           <Link
-            to="/dashboard"
-            className={location.pathname === '/dashboard' ? 'active' : ''}
+            to="/dashboarddashboard"
+            className={location.pathname === '/dashboarddashboard' ? 'active' : ''}
             onClick={handleLinkClick}
           >
             <FaChartBar /> Dashboard
@@ -93,9 +87,17 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
             <FaSignOutAlt /> Logout
           </button>
         </li>
+        <li>
+          <Link
+            to="/currency-converter"
+            className={location.pathname === '/currency-converter' ? 'active' : ''}
+            onClick={handleLinkClick}
+          >
+            <FaMoneyBillWave /> Currency Converter
+          </Link>
+        </li>
       </ul>
     </motion.nav>
   );
 };
-
 export default Navbar;
