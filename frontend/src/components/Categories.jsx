@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaTag } from 'react-icons/fa'; // 
+import { FaTag } from 'react-icons/fa';
 import './Categories.css';
 
 const Categories = () => {
@@ -11,7 +11,7 @@ const Categories = () => {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002';
 
   useEffect(() => {
     fetchCategories();
@@ -122,7 +122,10 @@ const Categories = () => {
         const err = await transactionsResponse.json();
         throw new Error(err.message || `Failed to fetch transactions: ${transactionsResponse.statusText}`);
       }
-      const transactions = await transactionsResponse.json();
+      const transactionsData = await transactionsResponse.json();
+      const transactions = transactionsData.transactions || [];
+
+      // Delete associated transactions
       const deletePromises = transactions.map((transaction) =>
         fetch(`${API_URL}/api/transactions/${transaction.id}`, {
           method: 'DELETE',
@@ -137,7 +140,7 @@ const Categories = () => {
       );
       await Promise.all(deletePromises);
 
-      // Now delete the category
+      // Now delete the category (backend will handle deleting associated budgets)
       const response = await fetch(`${API_URL}/api/categories/${id}`, {
         method: 'DELETE',
       });

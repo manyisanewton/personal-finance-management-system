@@ -1,0 +1,121 @@
+.converter-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #000000;
+    background-color: #1a1a2e;
+    min-height: 100vh;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .converter-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #4a90e2;
+  }
+  
+  .converter-container .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .converter-container .form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #cccccc;
+  }
+  
+  .converter-container .form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a4a;
+    color: #000000;
+    box-sizing: border-box;
+  }
+  
+  .converter-container .form-group input[type="number"]:focus {
+    outline: none;
+    background-color: #4a4a5a;
+  }
+  
+  .converter-container .form-group .react-select__control {
+    background-color: #3a3a4a;
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+  }
+  
+  .converter-container .form-group .react-select__single-value {
+    color: #000000;
+  }
+  
+  .converter-container .form-group .react-select__menu {
+    background-color: #2a2a3a;
+    color: #ffffff;
+  }
+  
+  .converter-container .form-group .react-select__option {
+    background-color: #2a2a3a;
+    color: #000000;
+  }
+  
+  .converter-container .form-group .react-select__option--is-focused {
+    background-color: #4a90e2;
+  }
+  
+  .converter-container button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .converter-container button:hover {
+    background-color: #357abd;
+  }
+  
+  .converter-container button:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+  }
+  
+  .converter-container .error-text {
+    padding: 10px;
+    background-color: #e74c3c;
+    color: #000000;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+  }
+  
+  .converter-container .result-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #2a2a3a;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .converter-container .result-container h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #000000;
+  }
+  
+  .converter-container .result-container p {
+    font-size: 16px;
+    color: #cccccc;
+    margin: 5px 0;
+  }

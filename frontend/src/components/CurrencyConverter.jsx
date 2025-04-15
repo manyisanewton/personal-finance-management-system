@@ -1,6 +1,7 @@
-
 import React, { useState } from 'react';
 import Select from 'react-select';
+import './CurrencyConverter.css';
+
 const currencyOptions = [
   { value: 'USD', label: 'United States Dollar (USD)' },
   { value: 'EUR', label: 'Euro (EUR)' },
@@ -24,6 +25,7 @@ const currencyOptions = [
   { value: 'LRD', label: 'Liberian Dollar (LRD)' },
   { value: 'XOF', label: 'West African CFA Franc (XOF)' },
 ];
+
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState('');
   const [fromCurrency, setFromCurrency] = useState(currencyOptions.find(opt => opt.value === 'USD'));
@@ -31,6 +33,7 @@ const CurrencyConverter = () => {
   const [conversionResult, setConversionResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
   const convertCurrency = async () => {
     setLoading(true);
     setError(null);
@@ -39,9 +42,7 @@ const CurrencyConverter = () => {
       const response = await fetch(
         `http://127.0.0.1:5001/api/convert?amount=${amount}&from=${fromCurrency.value}&to=${toCurrency.value}`
       );
-      if (!response.ok) {
-        throw new Error("Conversion failed");
-      }
+      if (!response.ok) throw new Error('Conversion failed');
       const data = await response.json();
       setConversionResult(data);
     } catch (err) {
@@ -50,23 +51,21 @@ const CurrencyConverter = () => {
       setLoading(false);
     }
   };
+
   return (
-    <div style={{ maxWidth: '600px', margin: '2rem auto', padding: '1rem', border: '1px solid #ddd', borderRadius: '8px' }}>
+    <div className="converter-container">
       <h2>Currency Converter</h2>
-      <div style={{ marginBottom: '1rem' }}>
-        <label style={{ marginRight: '1rem' }}>
-          Amount:
-          <input
-            type="number"
-            value={amount}
-            onChange={e => setAmount(e.target.value)}
-            placeholder="Enter amount"
-            style={{ marginLeft: '0.5rem' }}
-          />
-        </label>
+      <div className="form-group">
+        <label>Amount:</label>
+        <input
+          type="number"
+          value={amount}
+          onChange={e => setAmount(e.target.value)}
+          placeholder="Enter amount"
+        />
       </div>
-      <div style={{ marginBottom: '1rem' }}>
-        <label style={{ marginRight: '0.5rem' }}>From:</label>
+      <div className="form-group">
+        <label>From:</label>
         <Select
           value={fromCurrency}
           onChange={setFromCurrency}
@@ -74,8 +73,8 @@ const CurrencyConverter = () => {
           placeholder="Select currency"
         />
       </div>
-      <div style={{ marginBottom: '1rem' }}>
-        <label style={{ marginRight: '0.5rem' }}>To:</label>
+      <div className="form-group">
+        <label>To:</label>
         <Select
           value={toCurrency}
           onChange={setToCurrency}
@@ -83,12 +82,14 @@ const CurrencyConverter = () => {
           placeholder="Select currency"
         />
       </div>
-      <button onClick={convertCurrency} disabled={loading} style={{ marginTop: '1rem' }}>
+      <button onClick={convertCurrency} disabled={loading}>
         {loading ? 'Converting...' : 'Convert'}
       </button>
-      {error && <p style={{ color: 'red', marginTop: '1rem' }}>Error: {error}</p>}
+
+      {error && <p className="error-text">Error: {error}</p>}
+
       {conversionResult && (
-        <div style={{ marginTop: '1rem' }}>
+        <div className="result-container">
           <h3>Conversion Result:</h3>
           <p>
             {conversionResult.original_amount} {conversionResult.from_currency} ={' '}
@@ -100,4 +101,5 @@ const CurrencyConverter = () => {
     </div>
   );
 };
+
 export default CurrencyConverter;
