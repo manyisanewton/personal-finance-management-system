@@ -51,7 +51,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-    <h1 className="dashboard-title">Hello {username}, welcome back</h1>
+    <h1 className="dashboard-title">Hello {username}, welcome</h1>
 
     <div className="top-summary">
       <BalanceSummaryCard 

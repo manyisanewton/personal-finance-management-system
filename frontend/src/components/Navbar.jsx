@@ -3,9 +3,12 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaSignOutAlt, FaMoneyBillWave } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import "./Navbar.css"
+
 const Navbar = ({ isNavOpen, setIsNavOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       setIsNavOpen(false);
@@ -48,8 +51,8 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
       <ul>
         <li>
           <Link
-            to="/dashboarddashboard"
-            className={location.pathname === '/dashboarddashboard' ? 'active' : ''}
+            to="/dashboard"
+            className={location.pathname === '/dashboard' ? 'active' : ''}
             onClick={handleLinkClick}
           >
             <FaChartBar /> Dashboard
@@ -82,11 +85,6 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
             <FaList /> Categories
           </Link>
         </li>
-        <li className='logout-button'>
-          <button onClick={handleLogout}>
-            <FaSignOutAlt /> Logout
-          </button>
-        </li>
         <li>
           <Link
             to="/currency-converter"
@@ -95,6 +93,11 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
           >
             <FaMoneyBillWave /> Currency Converter
           </Link>
+        </li>
+        <li className='logout-button'>
+          <button onClick={handleLogout}>
+            <FaSignOutAlt /> Logout
+          </button>
         </li>
       </ul>
     </motion.nav>
