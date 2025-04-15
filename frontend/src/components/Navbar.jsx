@@ -1,4 +1,4 @@
-
+import './Navbar.css';
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaSignOutAlt, FaMoneyBillWave } from 'react-icons/fa';
