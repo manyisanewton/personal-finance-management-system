@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from "react";
 import './RecentTransactionsList.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBurger, faCar, faHome, faMoneyBill, faGamepad, faQuestionCircle, faMinusCircle, faPlusCircle, faUtensils } from '@fortawesome/free-solid-svg-icons';
+
+const categoryIcons = {
+    'Food': faBurger,
+    'Transport': faCar,
+    'Rent': faHome,
+    'Salary': faPlusCircle,
+    'Entertainment': faGamepad,
+    'Bills': faMoneyBill,
+    'Other': faQuestionCircle
+
+}
 
 const RecentTransactionsList = () => {
     const [transactions, setTransactions] = useState([]);
@@ -23,19 +36,28 @@ const RecentTransactionsList = () => {
 
     return (
         <div className="transactions-card">
-            <h2 className="transactions-title">Recent Transactions</h2>
+            <div className="transactions-header">
+                <h2 className="transactions-title">Recent Transactions</h2>
+            </div>
             {loading ? (
-                <p>Loading...</p>
+                <p className="loading-text">Loading...</p>
             ) : transactions.length === 0 ? (
-                <p>No recent transactions found.</p>
+                <p className="empty-text"> No recent transactions found.</p>
             ) : (
                 <ul className="transactions-list">
-                    {transactions.map((t) => (
+                    {transactions.slice(0, 5).map((t) => (
                         <li key={t.id} className={`t-item ${t.type.toLowerCase()}`}>
-                            <span className="t-date">{t.date}</span>
-                            <span className="t-category">{t.category}</span>
-                            <span className="t-amount">
-                                {t.type === "Expense" ? "-" : "+"}${t.amount.toFixed(2)}
+                            <div className="t-details">
+                                <FontAwesomeIcon icon={categoryIcons[t.category] || categoryIcons['Other']}
+                                    className="t-icon" />
+
+                                <div className="t-info">
+                                    <span className="t-description">{t.title}</span>
+                                    <span className="t-date">{new Date(t.date).toLocaleDateString(undefined, {year: 'numeric', month: 'short', day: 'numeric'})}</span>
+                                </div>
+                            </div>
+                            <span className={`t-amount ${t.type.toLowerCase()}`}>
+                                {t.type === "Expense" ? "-" : "+"}Ksh.{t.amount.toFixed(2)}
                             </span>
                         </li>
                     ))}

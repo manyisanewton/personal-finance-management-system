@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from models import User, db
 from flask import Flask
@@ -67,6 +67,12 @@ def login():
         return jsonify({'message': 'Login successful'}), 200
     else:
         return jsonify({'error': 'Invalid username or password'}), 401
+    
+# username root
+@auth_bp.route('/username', methods=['GET'])
+@login_required
+def get_username():
+    return jsonify({'username': current_user.username}), 200
 
 # logout route
 @auth_bp.route('/logout', methods=['POST'])

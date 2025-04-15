@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
+//Importing the necessary widgets for the dashboard
 import BalanceSummaryCard from './DashboardWidgets/BalanceSummaryCard';
 import MonthlySpendingChart from './DashboardWidgets/MonthlySpendingChart';
 import CategorySpendingChart from './DashboardWidgets/CategorySpendingChart';
@@ -16,6 +17,7 @@ const Dashboard = () => {
     total_expense: 0,
     balance: 0,
   });
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5001/api/transactions", {
@@ -38,30 +40,40 @@ const Dashboard = () => {
       .catch((error) => 
         console.error("Error fetching balance summary:", error)
       );
+
+      fetch("http://localhost:5001/api/username", {
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => setUsername(data.username))
+        .catch((error) => console.error("Error fetching user:", error));
   }, []);
 
   return (
-    <div className="dashboard-container p-10 min-h-screen bg-[#11121E] text-white">
-    <h1 className="text-2xl mb-6">Hello from Dashboard</h1>
+    <div className="dashboard-container">
+    <h1 className="dashboard-title">Hello {username}, welcome back</h1>
 
-    <div className="top-summary mb-6">
+    <div className="top-summary">
       <BalanceSummaryCard 
-        totalBalance={balanceSummary.balance}
-        totalExpenses={balanceSummary.total_expense}
+        label="Total Balance"
+        value={balanceSummary.balance}
+      />
+      <BalanceSummaryCard
+        label="Total Expenses"
+        value={balanceSummary.total_expense}
       />
         {/* ... */}
       </div>
 
-      <div className='charts-row'>
+      <div className='upper-widgets'>
         <MonthlySpendingChart transactions={transactions.transactions} />
         <CategorySpendingChart  /> 
-        <SpendingSummary />
-
       </div>
 
       <div className='bottom-widgets'>
         <RecentTransactionsList />
         <IncomeVsExpenseChart />
+        <SpendingSummary />
       </div>  
     </div>
   );      

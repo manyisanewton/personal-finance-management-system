@@ -1,14 +1,73 @@
 .spending-summary-card {
     background-color: #1D1D29;
     padding: 1rem;
-    border-radius: 12px;
+    border-radius: 0.5rem;
     color: #ffffff;
-    box-shadow: 0 0 10px rgba(255, 188, 17, 0.2);
-    margin-top: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    flex: 1;
+    min-width: 250px;
+}
+
+.progress-bar-container {
+    background-color: #333;
+    border-radius: 0.5rem;
+    height: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 0.5rem;
+    width: 0%
+}
+
+.overspent {
+    color: #FF4D4D;
 }
 
 .spending-summary-title {
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    color: #ffbc11;
+    color: #A0A1FC;
+    text-align: left;
+}
+
+.spending-summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+}
+
+.value {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.value.budget {
+    color: #86E29B;
+}
+
+.value.spent {
+    color: #E668EA;
+}
+
+.value.remaining {
+    color: #A0A1FC;
+}
+
+.loading-text, .error-text {
+    padding: 1rem 0;
+    text-align: center;
+    color: #b0b0b0;
 }

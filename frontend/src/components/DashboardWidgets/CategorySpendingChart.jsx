@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer, Legend, } from "recharts";
 import "./CategorySpendingChart.css";
 
-// the color palette for the pie chart
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF6699", "#FF33CC", "#FF9933", "#FFCC33"];
 
 const CategorySpendingChart = () => {
     const [categoryData, setCategoryData] = useState([]);
@@ -37,6 +35,33 @@ const CategorySpendingChart = () => {
             value: category.total_spent,
         }));
 
+    // the color palette for the pie chart
+    const COLORS = ["#A0A1FC", "#E668EA", "#6A6BFB", "#EFE84A", "#86E29B", "#FF94A"];
+
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+        const radius = outerRadius + 25;
+        const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
+        const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
+        return percent > 0.01 ? (
+            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${chartData[index]?.name} (${(percent * 100).toFixed(0)}%)`}
+            </text>
+        ) : null;
+    };
+
+    const renderCenterText = () => {
+        const totalExpenses = chartData.reduce((sum, entry) => sum + entry.value, 0);
+        return (
+            <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" style={{fontSize: '1.1rem', fill: 'white'}}>
+                {`Ksh.${totalExpenses.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                })}`}
+            </text>
+        );
+    };
+
+
     return (
         <div className="category-chart-card">
             <h2 className="chart-title">Categories</h2>
@@ -49,9 +74,14 @@ const CategorySpendingChart = () => {
                             data={chartData}
                             dataKey="value"
                             nameKey="name"
+                            cx="50%"
+                            cy="50%"
                             outerRadius={100}
+                            innerRadius={60} // center hole
                             fill="#8884d8"
-                            label
+                            label={renderCustomizedLabel}
+                            labelLine={false}
+                            paddingAngle={1}
                         >
                             {chartData.map((entry, index) => (
                                 <Cell
@@ -60,8 +90,9 @@ const CategorySpendingChart = () => {
                                 />
                             ))}
                         </Pie>
-                        <Tooltip />
-                        <Legend />
+                        <Tooltip formatter={(value) => `Ksh.${value.toLocaleString()}`}/>
+                        <Legend layout="vertical" align="right" verticalAlign="middle" wrapperStyle={{color: 'white'}}/>
+                        
                     </PieChart>
                 </ResponsiveContainer>
             ) : (

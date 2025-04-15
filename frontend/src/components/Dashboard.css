@@ -4,5 +4,49 @@
     padding: 2rem;
     min-height: 100vh;
   }
+
+  .dashboard-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+  }
+
+  .top-summary {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .top-summary div {
+    background-color: #1D1D29;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    flex: 1;
+  }
+
+  .upper-widgets {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .upper-widgets div {
+    background-color: #1D1D29;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    flex: 1;
+  }
+
+  .bottom-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .bottom-widgets div {
+    background-color: #1D1D29;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
   
 

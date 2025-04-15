@@ -30,14 +30,19 @@ const IncomeVsExpenseChart = () => {
 
     const data = [
         {name: 'Income', value: balanceSummary.total_income},
-        {name: 'Expense', value: balanceSummary.total_expense},
+        {name: 'Expense', value: balanceSummary.total_expense * -1},
     ];
+
+    const kshFormatter = (value) => `Ksh.${Math.abs(value).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    })}`
 
     if (loading) {
         return (
             <div className="income-expense-chart-card">
-                <h2>Income vs Expense</h2>
-                <p>Loading...</p>
+                <h2 className="income-expense-title">Income vs Expense</h2>
+                <p className="loading-text">Loading...</p>
             </div>
         );
     }
@@ -45,23 +50,29 @@ const IncomeVsExpenseChart = () => {
     if (error) {
         return (
             <div className="income-expense-chart-card">
-                <h2>Income vs Expense</h2>
-                <p>Error: {error}</p>
+                <h2 className="income-expense-title">Income vs Expense</h2>
+                <p className="error-text">Error: {error}</p>
             </div>
         );
     }
 
     return (
         <div className="income-expense-chart-card">
-            <h2 className="income-v-expense-title">Income vs Expense</h2>
+            <h2 className="income-expense-title">Income vs Expense</h2>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={data}>
-                    <cartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="value" name="Amount" fill="#43B430"></Bar>
+                    <cartesianGrid strokeDasharray="3 3" stroke="#2E4053" />
+                    <XAxis dataKey="name" stroke="#ffffff" tickLine={false} axisLine={false} />
+                    <YAxis stroke="#ffffff" tickLine={false} axisLine={false} tickFormatter={kshFormatter}/>
+                    <Tooltip 
+                        contentStyle={{ backgroundColor: "#1D1D29", border: "none", color: "#ffffff"}}
+                        itemStyle={{ color: "#ffffff"}}
+                        labelStyle={{color: "#A0A1FC"}}
+                        formatter={(value) => `Ksh.&{Math.abs(value).toFixed(2)}`}
+                    />
+                    <Legend wrapperStyle={{color: "#ffffff"}}/>
+                    <Bar dataKey="value" name="Amount" fill="#43B430" barSize={30} />
+                    <Bar dataKey="value" name="Amount" fill="E668EA" barSize={30} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

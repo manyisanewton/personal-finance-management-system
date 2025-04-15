@@ -1,15 +1,37 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { FaChartBar, FaWallet, FaExchangeAlt, FaList } from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaSignOutAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import './Navbar.css';
 
 const Navbar = ({ isNavOpen, setIsNavOpen }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       setIsNavOpen(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/api/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        console.log('Logout successful');
+        navigate('/login');
+      } else {
+        console.error('Logout failed:', response.status);
+      }
+    } catch (error) {
+      console.error('Error while logging out:', error);
     }
   };
 
@@ -32,8 +54,8 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
       <ul>
         <li>
           <Link
-            to="/"
-            className={location.pathname === '/' ? 'active' : ''}
+            to="/dashboard"
+            className={location.pathname === '/dashboard' ? 'active' : ''}
             onClick={handleLinkClick}
           >
             <FaChartBar /> Dashboard
@@ -65,6 +87,11 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
           >
             <FaList /> Categories
           </Link>
+        </li>
+        <li className='logout-button'>
+          <button onClick={handleLogout}>
+            <FaSignOutAlt /> Logout
+          </button>
         </li>
       </ul>
     </motion.nav>

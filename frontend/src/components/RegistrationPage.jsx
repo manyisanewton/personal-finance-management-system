@@ -59,9 +59,9 @@ const RegistrationPage = () => {
         <div className="registration-page">
             {/* Left section */}
             <div className="registration-left">
-                <h1>Welcome Back</h1>
-                <p>Welcome back our esteemed customer</p>
-                <button type="button" onClick={() => navigate("/login")}>Sign In</button>
+                <h1>Missed Us? Sign In! </h1>
+                <p>Make smarter financial decisions with us.</p>
+                <button type="button" onClick={() => navigate("/login")}>LogIn</button>
                 <img src="https://img.icons8.com/fluency/96/money-bag.png" alt="finance-icon" />
             </div>
 
