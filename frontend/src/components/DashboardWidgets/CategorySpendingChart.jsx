@@ -3,12 +3,17 @@ import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer, Legend, } from "rech
 import "./CategorySpendingChart.css";
 
 
-const CategorySpendingChart = () => {
+const CategorySpendingChart = ({ accountId }) => {
     const [categoryData, setCategoryData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
     useEffect(() => {
-        fetch("http://localhost:5001/api/category_spending_summary", {
+        const params = new URLSearchParams();
+        if (accountId) {
+            params.append('account_id', accountId);
+        }
+        fetch(`${API_URL}/api/category_spending_summary?${params.toString()}`, {
             credentials: "include",
           })
           
@@ -25,7 +30,7 @@ const CategorySpendingChart = () => {
                 console.error("Error fetching category data:", error);
             })
             .finally(() => setLoading(false));
-    }, []);
+    }, [API_URL, accountId]);
 
     // suitable data for the chart
     const chartData = categoryData

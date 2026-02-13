@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianAxis, Tooltip, Legend,ResponsiveContainer } from "recharts";
 import "./IncomeVsExpenseChart.css";
 
-const IncomeVsExpenseChart = () => {
+const IncomeVsExpenseChart = ({ accountId }) => {
     const [balanceSummary, setBalanceSummary] = useState({ total_income: 0, total_expense: 0 });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
     useEffect (() => {
-        fetch("http://localhost:5001/api/balance_summary", {
+        const params = new URLSearchParams();
+        if (accountId) {
+            params.append('account_id', accountId);
+        }
+        fetch(`${API_URL}/api/balance_summary?${params.toString()}`, {
             credentials: "include",
         })
             .then((response) => {
@@ -26,7 +31,7 @@ const IncomeVsExpenseChart = () => {
                 setError(error);
                 setLoading(false);
             });
-    }, []);
+    }, [API_URL, accountId]);
 
     const data = [
         {name: 'Income', value: balanceSummary.total_income},

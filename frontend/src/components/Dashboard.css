@@ -1,52 +1,84 @@
 .dashboard-container {
-    background-color: #11121E;
-    color: white;
-    padding: 2rem;
-    min-height: 100vh;
-  }
+  background-color: #11121E;
+  color: white;
+  padding: 2rem;
+  min-height: 100vh;
+}
 
-  .dashboard-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
-  }
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
 
-  .top-summary {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
+.dashboard-title {
+  font-size: 2rem;
+  margin: 0;
+  color: #ffffff;
+}
 
-  .top-summary div {
-    background-color: #1D1D29;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    flex: 1;
-  }
+.account-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
-  .upper-widgets {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
+.account-filter label {
+  font-size: 0.9rem;
+  color: #9fa3b5;
+}
 
-  .upper-widgets div {
-    background-color: #1D1D29;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    flex: 1;
-  }
+.account-filter select {
+  background-color: #1D1D29;
+  color: #ffffff;
+  border: 1px solid #2e3142;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
 
-  .bottom-widgets {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
+.top-summary {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
 
-  .bottom-widgets div {
-    background-color: #1D1D29;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-  }
-  
+.top-summary div {
+  background-color: #1D1D29;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  flex: 1;
+}
 
+.upper-widgets {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.upper-widgets div {
+  background-color: #1D1D29;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  flex: 1;
+}
+
+.bottom-widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.bottom-widgets div {
+  background-color: #1D1D29;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

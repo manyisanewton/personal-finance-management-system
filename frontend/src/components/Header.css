@@ -25,7 +25,22 @@
     margin: 0;
     color: var(--nav-text);
   }
-  
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--nav-text);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+
   .route-title {
     font-size: 1.2rem;
     color: var(--accent);

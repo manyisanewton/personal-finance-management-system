@@ -14,12 +14,17 @@ const categoryIcons = {
 
 }
 
-const RecentTransactionsList = () => {
+const RecentTransactionsList = ({ accountId }) => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true)
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
     useEffect(() => {
-        fetch("http://localhost:5001/api/recent_transactions", {
+        const params = new URLSearchParams();
+        if (accountId) {
+            params.append('account_id', accountId);
+        }
+        fetch(`${API_URL}/api/recent_transactions?${params.toString()}`, {
             credentials: "include",
         })
             .then((response) => {
@@ -32,7 +37,7 @@ const RecentTransactionsList = () => {
             })
             .catch((err) => console.error(err))
             .finally(() => setLoading(false))
-    }, []);
+    }, [API_URL, accountId]);
 
     return (
         <div className="transactions-card">

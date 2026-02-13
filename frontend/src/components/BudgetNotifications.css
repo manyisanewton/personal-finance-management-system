@@ -1,0 +1,129 @@
+.budget-notifications {
+  position: relative;
+}
+
+.notification-button {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: var(--nav-text);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.notification-badge.budget {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: #2ecc71;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+.notification-panel {
+  position: absolute;
+  right: 0;
+  top: 42px;
+  width: 320px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  padding: 12px;
+  z-index: 1100;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.panel-header h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.panel-header button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.notification-list li {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.notification-list li.unread {
+  border-color: rgba(46, 204, 113, 0.6);
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-item .title {
+  font-weight: 600;
+}
+
+.notification-item .amount {
+  color: #2ecc71;
+}
+
+.notification-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.mark-read {
+  margin-top: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.panel-status {
+  margin: 6px 0;
+  color: var(--text-secondary);
+}
+
+.panel-status.error {
+  color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .notification-panel {
+    width: 280px;
+  }
+}

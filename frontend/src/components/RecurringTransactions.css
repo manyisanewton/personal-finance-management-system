@@ -1,0 +1,151 @@
+.recurring-page {
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+.recurring-page h2 {
+  margin-bottom: 20px;
+}
+
+.recurring-form-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.recurring-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toggle-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.form-row input,
+.form-row select {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+}
+
+.form-actions button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: var(--nav-text);
+  cursor: pointer;
+}
+
+.form-actions button.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.recurring-list {
+  display: grid;
+  gap: 16px;
+}
+
+.recurring-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.recurring-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recurring-header h4 {
+  margin: 0;
+}
+
+.recurring-header .meta {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.status.active {
+  background: rgba(67, 180, 48, 0.2);
+  color: #43b430;
+}
+
+.status.inactive {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.recurring-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.recurring-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.recurring-actions button {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.recurring-actions button.danger {
+  border-color: rgba(231, 76, 60, 0.4);
+  color: #e74c3c;
+}
+
+.loading,
+.empty {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .recurring-form {
+    grid-template-columns: 1fr;
+  }
+
+  .recurring-actions {
+    flex-direction: column;
+  }
+}

@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import "./SpendingSummary.css";
 import { sum } from "lodash";
 
-const SpendingSummary = () => {
+const SpendingSummary = ({ accountId }) => {
     const [summary, setSummary] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
     useEffect(() => {
         const fetchSpendingSummary = async () => {
             try {
-                const response = await fetch("http://localhost:5001/api/spending_summary", {
+                const params = new URLSearchParams();
+                if (accountId) {
+                    params.append('account_id', accountId);
+                }
+                const response = await fetch(`${API_URL}/api/spending_summary?${params.toString()}`, {
                     credentials: "include",
                 });
                 if (!response.ok) {
@@ -28,7 +33,7 @@ const SpendingSummary = () => {
 
         fetchSpendingSummary();
 
-    }, []);
+    }, [API_URL, accountId]);
 
     if (loading) {
         return (

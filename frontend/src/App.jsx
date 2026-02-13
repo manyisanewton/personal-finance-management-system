@@ -13,6 +13,8 @@ const Dashboard = React.lazy(() => import('./components/Dashboard'));
 const LoginPage = React.lazy(() => import('./components/LoginPage'));
 const RegistrationPage = React.lazy(() => import('./components/RegistrationPage'));
 const CurrencyConverter = React.lazy(() => import('./components/CurrencyConverter'));
+const RecurringTransactions = React.lazy(() => import('./components/RecurringTransactions'));
+const Accounts = React.lazy(() => import('./components/Accounts'));
 
 import './App.css';
 
@@ -36,6 +38,8 @@ const AppLayout = () => {
     if (path === '/dashboard') return 'Dashboard';
     if (path === '/budget') return 'Budget';
     if (path === '/transactions') return 'Transactions';
+    if (path === '/accounts') return 'Accounts';
+    if (path === '/recurring') return 'Recurring';
     if (path === '/categories') return 'Categories';
     if (path === '/currency-converter') return 'Currency Converter';
     return '';
@@ -70,6 +74,8 @@ const AppLayout = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/budget" element={<Budget />} />
               <Route path="/transactions" element={<Transactions />} />
+              <Route path="/accounts" element={<Accounts />} />
+              <Route path="/recurring" element={<RecurringTransactions />} />
               <Route path="/categories" element={<Categories />} />
               <Route path="/currency-converter" element={<CurrencyConverter />} />
             </Routes>

@@ -1,14 +1,14 @@
 import './Navbar.css';
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaSignOutAlt, FaMoneyBillWave } from 'react-icons/fa';
+import { FaChartBar, FaWallet, FaExchangeAlt, FaList, FaSignOutAlt, FaMoneyBillWave, FaRedoAlt, FaUniversity } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import "./Navbar.css"
 
 const Navbar = ({ isNavOpen, setIsNavOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       setIsNavOpen(false);
@@ -74,6 +74,24 @@ const Navbar = ({ isNavOpen, setIsNavOpen }) => {
             onClick={handleLinkClick}
           >
             <FaExchangeAlt /> Transactions
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/accounts"
+            className={location.pathname === '/accounts' ? 'active' : ''}
+            onClick={handleLinkClick}
+          >
+            <FaUniversity /> Accounts
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/recurring"
+            className={location.pathname === '/recurring' ? 'active' : ''}
+            onClick={handleLinkClick}
+          >
+            <FaRedoAlt /> Recurring
           </Link>
         </li>
         <li>

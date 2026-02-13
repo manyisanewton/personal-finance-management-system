@@ -2,6 +2,8 @@ import React from 'react';
 import { FaBars ,FaSun,FaMoon} from 'react-icons/fa';
 import './Header.css';
 import {useTheme} from '../context/ThemeContext';
+import RecurringNotifications from './RecurringNotifications';
+import BudgetNotifications from './BudgetNotifications';
 
 const Header = ({ routeTitle, isNavOpen, setIsNavOpen }) => {
     const{theme,toggleTheme}=useTheme();
@@ -13,6 +15,8 @@ const Header = ({ routeTitle, isNavOpen, setIsNavOpen }) => {
         <span className="route-title">{routeTitle}</span>
       </div>
       <div className="header-right">
+        <RecurringNotifications />
+        <BudgetNotifications />
         <button
         className="theme-toggle"
         onClick={toggleTheme}

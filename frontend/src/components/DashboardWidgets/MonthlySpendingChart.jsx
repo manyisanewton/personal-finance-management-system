@@ -4,29 +4,29 @@ import "./MonthlySpendingChart.css";
 
 const MonthlySpendingChart = ({ transactions }) => {
     
-  //In the case where transactions is not an array
   const dataArray = Array.isArray(transactions) ? transactions : [];
 
-  const monthlySpending = dataArray.reduce((acc, transaction) => {
-    const date = new Date(transaction.date);
-    const month = date.toLocaleString("default", { month: "short" }).toUpperCase();
-    const year = date.getFullYear();
-    const key = `${month} ${year}`;
+  const monthlySpending = dataArray
+    .filter((transaction) => !transaction.is_transfer)
+    .reduce((acc, transaction) => {
+      const date = new Date(transaction.date);
+      const month = date.toLocaleString("default", { month: "short" }).toUpperCase();
+      const year = date.getFullYear();
+      const key = `${month} ${year}`;
 
-    if (!acc[key]) {
-      acc[key] = 0;
-    }
+      if (!acc[key]) {
+        acc[key] = 0;
+      }
 
-    acc[key] += transaction.amount;
-    return acc;
-  }, {});
+      acc[key] += transaction.amount;
+      return acc;
+    }, {});
 
   const chartData = Object.entries(monthlySpending).map(([month, amount]) => ({
     month,
     amount,
   }));
 
-  //  format to be Ksh.
   const kshFormatter = (value) => `Ksh.${value.toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -39,7 +39,6 @@ const MonthlySpendingChart = ({ transactions }) => {
         <ResponsiveContainer width="100%" height={250}>
             <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#2E4053" />
-            {/* ticklines helps remove the lines */}
             <XAxis dataKey="month" stroke="#ffffff" tickLine={false} axisLine={false} />
             <YAxis stroke="#ffffff" tickLine={false} axisLine={false} tickFormatter={kshFormatter} />
             <Tooltip 

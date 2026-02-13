@@ -12,15 +12,18 @@ const Budget = () => {
     category_id: '',
     month: new Date().toISOString().slice(0, 7), 
     amount: '',
+    alert_thresholds: [50, 75, 90, 100],
   });
   const [monthFilter, setMonthFilter] = useState(new Date().toISOString().slice(0, 7));
   const [loading, setLoading] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
 
+  const defaultThresholds = [50, 75, 90, 100];
+
   // In-memory cache for API responses
   const cache = useRef(new Map());
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
   useEffect(() => {
     fetchCategories();
@@ -141,6 +144,15 @@ const Budget = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleThresholdToggle = (value) => {
+    setForm((prev) => {
+      const thresholds = prev.alert_thresholds || [];
+      const exists = thresholds.includes(value);
+      const next = exists ? thresholds.filter((item) => item !== value) : [...thresholds, value];
+      return { ...prev, alert_thresholds: next.sort((a, b) => a - b) };
+    });
+  };
+
   const handleMonthFilterChange = (e) => {
     setMonthFilter(e.target.value);
   };
@@ -180,6 +192,7 @@ const Budget = () => {
         category_id: parseInt(form.category_id),
         month: form.month,
         amount: parseFloat(form.amount),
+        alert_thresholds: form.alert_thresholds && form.alert_thresholds.length ? form.alert_thresholds : defaultThresholds,
       };
       console.log('Submitting budget to:', url);
       console.log('Payload:', payload);
@@ -209,7 +222,13 @@ const Budget = () => {
           text: 'Budget added successfully',
         });
       }
-      setForm({ id: null, category_id: '', month: new Date().toISOString().slice(0, 7), amount: '' });
+      setForm({
+        id: null,
+        category_id: '',
+        month: new Date().toISOString().slice(0, 7),
+        amount: '',
+        alert_thresholds: defaultThresholds,
+      });
       fetchBudgets(); // Refresh budgets
       fetchSpending(); // Refresh the spending to check for budget limits
     } catch (error) {
@@ -230,6 +249,7 @@ const Budget = () => {
       category_id: budget.category_id,
       month: budget.month,
       amount: budget.amount,
+      alert_thresholds: budget.alert_thresholds && budget.alert_thresholds.length ? budget.alert_thresholds : defaultThresholds,
     });
   };
 
@@ -327,6 +347,21 @@ const Budget = () => {
               step="0.01"
               required
             />
+          </div>
+          <div className="form-group thresholds">
+            <label>Alert Thresholds</label>
+            <div className="threshold-options">
+              {defaultThresholds.map((threshold) => (
+                <label key={threshold} className="threshold-option">
+                  <input
+                    type="checkbox"
+                    checked={form.alert_thresholds?.includes(threshold)}
+                    onChange={() => handleThresholdToggle(threshold)}
+                  />
+                  {threshold}%
+                </label>
+              ))}
+            </div>
           </div>
           <motion.button
             type="submit"

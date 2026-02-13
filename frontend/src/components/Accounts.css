@@ -1,0 +1,151 @@
+.accounts-page {
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.accounts-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.accounts-form {
+  display: grid;
+  gap: 10px;
+}
+
+.accounts-form input,
+.accounts-form select {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.form-actions button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--nav-text);
+  cursor: pointer;
+}
+
+.form-actions button.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.accounts-list {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 20px;
+}
+
+
+.reconcile-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.reconcile-row:last-child {
+  border-bottom: none;
+}
+
+.reconcile-list .balance {
+  align-items: flex-end;
+}
+
+.csv-form {
+  margin-top: 12px;
+}
+
+.account-row,
+.transfer-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.transfer-row {
+  grid-template-columns: 1fr auto;
+}
+
+.account-row:last-child,
+.transfer-row:last-child {
+  border-bottom: none;
+}
+
+.account-row .meta,
+.transfer-row .meta {
+  color: var(--text-secondary);
+  margin: 4px 0 0;
+}
+
+.balance {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.actions .danger {
+  border-color: rgba(231, 76, 60, 0.4);
+  color: #e74c3c;
+}
+
+.loading,
+.empty {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .account-row,
+  .transfer-row,
+  .reconcile-row {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+}
